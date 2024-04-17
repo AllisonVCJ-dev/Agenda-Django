@@ -1,12 +1,11 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import  User
 
 # id (primary key - automático)
 # first_name (string), last_name (string), phone (string)
 # email (email), created_date (date), description (text)
-# category (foreign key), show (boolean), picture (imagem)
-
-# Depois
+# category (foreign key), show (boolean), picture (imagem),
 # owner (foreign key)
 
 class Category(models.Model):
@@ -33,6 +32,11 @@ class Contact(models.Model):
         on_delete=models.SET_NULL,
         blank=True, null=True
     )
-    
+    owner =  models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL,
+        blank=True, null=True
+    )
+
     def __str__(self) -> str:
         return f'{self.first_name} {self.last_name}'
